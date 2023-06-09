@@ -1,0 +1,239 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Neural-Brain Tumor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+      #loading-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background-image: url('/static/images/loading.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        display: none;
+      }
+      .home-icon {
+        font-size: 24px;
+        color: #333;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Brain Tumor Predictor</h1>
+    <div style="display: inline-block;">
+      <a href="http://ec2-43-205-206-227.ap-south-1.compute.amazonaws.com:8080/radiologist/login-radiologist"><i class="fas fa-home home-icon"></i></a><br><br>
+      
+      <form id="drform"
+        method="post"
+        enctype="multipart/form-data"
+        action="/drform"
+        onsubmit="showLoadingIcon(event)"
+      >
+        
+        <label>Image: </label><br />
+        <input
+          type="file"
+          name="img"
+          name="uploaded-file"
+          accept=".jpg, .png, .jpeg"
+        /><br /><br />
+        <div id="loading-icon"></div>
+        {% if result %}
+        {% for para in result %}
+        <p>{{para}}</p>
+        {% endfor %}
+        {% endif %}
+        
+        <center><input type="submit" value="Submit" class="submit" /></center>
+      </form></div>
+      
+        <div style="display: inline-block;">
+        <a href="http://ec2-43-205-206-227.ap-south-1.compute.amazonaws.com:8080/radiologist/login-radiologist"><i class="fas fa-home home-icon"></i></a><br><br>
+        
+        <form id="dbform"
+          method="post"
+          enctype="multipart/form-data"
+          action="/dbform"
+          onsubmit="showLoadingIcon(event)"
+        >
+          <label>Patient ID: </label><br />
+          <input type="text" name="pm" /><br /><br />
+  
+          <label>Doctor reference number: </label><br />
+          <input type="text" name="dr" /><br /><br />
+          <label>Radiologist's Observation: </label><br />
+          <input type="text" name="ro" /><br /><br />
+          {% if res %}
+          <p>{{res}}</p>
+          {% endif %}
+          <center><input type="submit" value="Submit to Doctor" class="submit-to-db"/></center> 
+        </form></div>
+      
+
+
+    <script>
+      function showLoadingIcon(event) {
+        event.preventDefault();
+        var form = event.target;
+        var loadingIcon = document.querySelector('#loading-icon');
+
+        // Show the loading icon
+        loadingIcon.style.display = 'block';
+
+        // Submit the form after 1 second (for demo purposes only)
+        setTimeout(function() {
+          form.submit();
+        }, 1000);
+      }
+    </script>
+s
+    
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Neural-Brain Tumor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      #loading-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background-image: url('/static/images/loading.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        display: none;
+      }
+      .home-icon {
+        font-size: 24px;
+        color: #333;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body style="display: flex;flex-direction: column; align-items: center;">
+    <h1>Brain Tumor Detection</h1>
+
+    <div
+      class="main-div-form"
+    >
+      <div>
+        <a
+          href="http://ec2-43-205-206-227.ap-south-1.compute.amazonaws.com:8080/radiologist/login-radiologist"
+        >
+          <i class="fas fa-home home-icon"></i>
+        </a>
+        <br />
+        <br />
+
+        <form
+          id="drform"
+          method="post"
+          enctype="multipart/form-data"
+          action="/drform"
+          onsubmit="showLoadingIcon(event)"
+        >
+          <label>Image:</label>
+          <br />
+          <input
+            type="file"
+            name="img"
+            name="uploaded-file"
+            accept=".jpg, .png, .jpeg"
+          />
+          <br />
+          <br />
+          <div id="loading-icon"></div>
+          {% if result %} {% for para in result %}
+          <p>{{para}}</p>
+          {% endfor %} {% endif %}
+
+          <center>
+            <input type="submit" value="Submit" class="submit" />
+          </center>
+        </form>
+      </div>
+
+      <div style="margin: 2rem;">
+        <a
+          href="http://ec2-43-205-206-227.ap-south-1.compute.amazonaws.com:8080/radiologist/login-radiologist"
+        >
+          <i class="fas fa-home home-icon"></i>
+        </a>
+        <br />
+        <br />
+
+        <form
+          id="dbform"
+          method="post"
+          enctype="multipart/form-data"
+          action="/dbform"
+          onsubmit="showLoadingIcon(event)"
+        >
+          <label>Patient ID:</label>
+          <br />
+          <input type="text" name="pm" />
+          <br />
+          <br />
+
+          <label>Doctor reference number:</label>
+          <br />
+          <input type="text" name="dr" />
+          <br />
+          <br />
+          <label>Radiologist's Observation:</label>
+          <br />
+          <textarea id="message" name="ro"  rows="4" cols="10"></textarea>
+          <br />
+          <br />
+          {% if res %}
+          <p>{{res}}</p>
+          {% endif %}
+          <center>
+            <input
+              type="submit"
+              value="Submit to Doctor"
+              class="submit-to-db"
+            />
+          </center>
+        </form>
+      </div>
+    <!-- </center> -->
+
+    <script>
+      function showLoadingIcon(event) {
+        event.preventDefault()
+        var form = event.target
+        var loadingIcon = document.querySelector('#loading-icon')
+
+        // Show the loading icon
+        loadingIcon.style.display = 'block'
+
+        // Submit the form after 1 second (for demo purposes only)
+        setTimeout(function () {
+          form.submit()
+        }, 1000)
+      }
+    </script>
+
+  </body>
+</html>
